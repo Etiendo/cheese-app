@@ -5,6 +5,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
 import Map from '../Component/Map'
 
+
 const MapStackNavigator = createStackNavigator({
     Map: {
         screen: Map,
