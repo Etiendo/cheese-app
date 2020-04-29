@@ -22,14 +22,14 @@ const styles = StyleSheet.create({
     },
     text_container: {
         flex: 1,
-        alignContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     map_container: {
         flex: 4,
         backgroundColor: 'red',
-        alignContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })
 
