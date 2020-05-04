@@ -3,7 +3,8 @@ import { StyleSheet, Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation-stack'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 import { createAppContainer } from 'react-navigation'
-import Map from '../Component/Map'
+import Map from '../Components/Map'
+import ShopsList from '../Components/ShopsList'
 
 
 const MapStackNavigator = createStackNavigator({
@@ -18,18 +19,40 @@ const MapStackNavigator = createStackNavigator({
     }
 })
 
+const ShopsListStackNavigator = createStackNavigator({
+    ShopsList: {
+        screen: ShopsList,
+        navigationOptions: {
+            title: 'Liste des échoppes',
+            headerStyle: {
+                backgroundColor: 'grey'
+            }
+        }
+    }
+})
+
 const ShopsTabsNavigator = createBottomTabNavigator(
     {
-        Carte: {
+        Map: {
             screen: MapStackNavigator,
             navigationOptions: {
                 tabBarIcon: () => {
                     return <Image
-                        source={require('../Images/map_browse.png')}
+                        source={require('../Images/map_browse_icon.png')}
                         style={styles.icon} />
                 }
             }
         },
+        ShopsList: {
+            screen: ShopsListStackNavigator,
+            navigationOptions: {
+                tabBarIcon: () => {
+                    return <Image
+                        source={require('../Images/shop_icon.png')}
+                        style={styles.icon} />
+                }
+            }
+        }
     },
     {
         tabBarOptions: {

@@ -2,6 +2,15 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 class Map extends React.Component {
+
+    componentDidMount() {
+        this._buildMap()
+    }
+
+    _buildMap() {
+        console.log('Build map')
+    }
+
     render() {
         return (
             <View style={styles.main_container}>
