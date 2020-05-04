@@ -11,10 +11,7 @@ const MapStackNavigator = createStackNavigator({
     Map: {
         screen: Map,
         navigationOptions: {
-            title: 'Carte interactive',
-            headerStyle: {
-                backgroundColor: 'grey'
-            }
+            title: 'Carte interactive'
         }
     }
 })
@@ -23,10 +20,7 @@ const ShopsListStackNavigator = createStackNavigator({
     ShopsList: {
         screen: ShopsList,
         navigationOptions: {
-            title: 'Liste des échoppes',
-            headerStyle: {
-                backgroundColor: 'grey'
-            }
+            title: 'Liste des échoppes'
         }
     }
 })
