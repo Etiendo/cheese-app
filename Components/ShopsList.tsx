@@ -9,7 +9,6 @@ class ShopsList extends React.Component {
             shops: [],
             isLoading: false
         }
-        this._loadShops = this._loadShops.bind(this)
     }
 
     _loadShops() {
@@ -45,9 +44,8 @@ class ShopsList extends React.Component {
                     style={styles.list}
                     data={this.state.shops}
                     keyExtractor={(item: any) => item.id.toString()}
-                    renderItem={({ item }) => (<Text>{item.name}</Text>)}
+                    renderItem={({ item }) => <Text>{item.name}</Text>}
                 />
-
                 {this._displayLoading()}
             </View>
         )
@@ -69,7 +67,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         alignItems: 'center',
         justifyContent: 'center'
-    },
+    }
 })
 
 export default ShopsList
