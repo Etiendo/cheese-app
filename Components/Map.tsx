@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import MapView from 'react-native-maps'
+
 
 class Map extends React.Component {
 
@@ -18,7 +20,7 @@ class Map extends React.Component {
                     <Text>Trouvez votre échoppe !</Text>
                 </View>
                 <View style={styles.map_container}>
-                    <Text>Carte à venir prochainement ! </Text>
+                    <MapView style={styles.map_style} />
                 </View>
             </View>
         )
@@ -36,10 +38,12 @@ const styles = StyleSheet.create({
     },
     map_container: {
         flex: 4,
-        backgroundColor: 'red',
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+    map_style: {
+        ...StyleSheet.absoluteFillObject,
+    },
 })
 
 export default Map

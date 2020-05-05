@@ -1,9 +1,9 @@
 {
-  "devToolsPort": 19002,
+  "devToolsPort": 19003,
   "expoServerPort": 19000,
   "packagerPort": 19001,
-  "packagerPid": 12923,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "packagerPid": 17215,
+  "expoServerNgrokUrl": "https://qt-q3c.anonymous.cheese-app.exp.direct",
+  "packagerNgrokUrl": "https://packager.qt-q3c.anonymous.cheese-app.exp.direct",
+  "ngrokPid": 17245
 }
