@@ -1,13 +1,14 @@
 import React from 'react'
-import { View, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Text, StyleSheet, ActivityIndicator, TextInput, Button } from 'react-native'
 import MapView from 'react-native-maps'
 import { Marker } from 'react-native-maps'
-import { getAllShops } from '../API/chesseApi'
+import { getAllShops, getShop } from '../API/chesseApi'
 
 
 class Map extends React.Component {
-    constructor(props: any, private searchedText: string, private page: number, private totalPages: number) {
+    constructor(props: any, private searchedText: string) {
         super(props)
+        this.searchedText
         this.state = {
             shops: [],
             region: {
@@ -21,6 +22,28 @@ class Map extends React.Component {
         }
     }
 
+    _searchShop() {
+        if (this.searchedText.length === 0) {
+            this._loadShops()
+        } else {
+        this.setState({ shops: [] },
+            () => {this._loadShop() })
+        }
+    }
+
+    _loadShop() {
+        if (this.searchedText.length > 0) {
+            this.setState({ isLoading: true })
+            getShop(this.searchedText).then(data => {
+                this.setState({
+                    shops: this.state.shops.concat(data.results),
+                    isLoading: false
+                })
+                this.buildMarkers()
+            })
+        }
+    }
+
     _loadShops() {
         this.setState({
             isLoading: true
@@ -30,13 +53,13 @@ class Map extends React.Component {
                 shops: data.results,
                 isLoading: false
             })
-            this.buildMarkers(this.state.shops)
+            this.buildMarkers()
         })
     }
 
-    buildMarkers(shopList: Array<any>) {
+    buildMarkers() {
         const markers: Array<any> = []
-        shopList.forEach(shop => {
+        this.state.shops.forEach(shop => {
             const marker = {
                 title: null,
                 coordinate: {}
@@ -84,7 +107,6 @@ class Map extends React.Component {
                 <Text>Points d'intérêts non chargés...</Text>
             )
         }
-        
     }
 
     componentDidMount() {
@@ -94,8 +116,13 @@ class Map extends React.Component {
     render() {
         return (
             <View style={styles.main_container}>
-                <View style={styles.text_container}>
-                    <Text>Trouvez votre échoppe !</Text>
+                <View style={styles.search_container}>
+                    <TextInput
+                        style={styles.textinput}
+                        placeholder="Nom de l'échoppe"
+                        onChangeText={text => this.searchedText = text}
+                        onSubmitEditing={() => this._searchShop()} />
+                    <Button title='Rechercher' onPress={() => this._searchShop()} />
                 </View>
                 <View style={styles.map_container}>
                     {this._displayMap()}
@@ -110,10 +137,8 @@ const styles = StyleSheet.create({
     main_container: {
         flex: 1,
     },
-    text_container: {
+    search_container: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
     },
     map_container: {
         flex: 4,
@@ -131,7 +156,15 @@ const styles = StyleSheet.create({
         bottom: 0,
         alignItems: 'center',
         justifyContent: 'center'
-    }
+    },
+    textinput: {
+        marginLeft: 5,
+        marginRight: 5,
+        height: 50,
+        borderColor: '#000001',
+        borderWidth: 1,
+        paddingLeft: 5
+    },
 })
 
 export default Map
